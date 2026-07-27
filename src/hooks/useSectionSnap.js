@@ -20,20 +20,39 @@ const useSectionSnap = () => {
       const sections = Array.from(document.querySelectorAll("[data-snap]"));
       if (!sections.length) return;
 
-      const tops = sections.map((el) =>
-        Math.round(el.getBoundingClientRect().top + window.scrollY)
-      );
+      const vh = window.innerHeight;
       const y = window.scrollY;
+      const tops = sections.map((el) =>
+        Math.round(el.getBoundingClientRect().top + y)
+      );
+      const bottoms = sections.map((el, i) => tops[i] + el.offsetHeight);
 
       let current = 0;
       tops.forEach((t, i) => {
-        if (y >= t - window.innerHeight * 0.4) current = i;
+        if (y >= t - vh * 0.4) current = i;
       });
 
-      const target = Math.min(tops.length - 1, Math.max(0, current + dir));
+      // 模块比窗口高时：先在模块内分页滚动，滚到边缘再切换模块
+      let target;
+      if (dir > 0) {
+        const maxY = bottoms[current] - vh;
+        if (y < maxY - 8) {
+          target = Math.min(y + vh * 0.85, maxY);
+        } else {
+          target = tops[Math.min(sections.length - 1, current + 1)];
+        }
+      } else {
+        if (y > tops[current] + 8) {
+          target = Math.max(y - vh * 0.85, tops[current]);
+        } else {
+          const prev = Math.max(0, current - 1);
+          // 回看上一模块：若它也超高，先落在其底部对齐处
+          target = Math.max(tops[prev], bottoms[prev] - vh);
+        }
+      }
 
       locked = true;
-      window.scrollTo({ top: tops[target], behavior: "smooth" });
+      window.scrollTo({ top: target, behavior: "smooth" });
       setTimeout(() => {
         locked = false;
       }, LOCK_MS);

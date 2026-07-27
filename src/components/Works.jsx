@@ -51,7 +51,7 @@ const ProjectCard = ({ index, project, meta }) => {
         className='bg-tertiary border border-line p-4 rounded-2xl w-full h-full shadow-card'
       >
         <div className='flex flex-col h-full'>
-          <div className='relative w-full h-[130px] flex-shrink-0'>
+          <div className='relative w-full h-[clamp(88px,13vh,130px)] flex-shrink-0'>
             {cover && !imgFailed ? (
               <img
                 src={cover}
@@ -160,7 +160,7 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <div className='mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 items-stretch'>
+      <div className='mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch'>
         {projects.map((project, index) => (
           <ProjectCard
             key={`project-${index}`}
