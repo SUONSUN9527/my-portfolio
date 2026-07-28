@@ -78,11 +78,34 @@ const useSectionSnap = () => {
       }
     };
 
+    // 窗口大小变化后，自动重新对齐当前模块顶部，避免视图错位
+    let resizeTimer;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const sections = Array.from(document.querySelectorAll("[data-snap]"));
+        if (!sections.length) return;
+        const vh = window.innerHeight;
+        const y = window.scrollY;
+        const tops = sections.map((el) =>
+          Math.round(el.getBoundingClientRect().top + y)
+        );
+        let current = 0;
+        tops.forEach((t, i) => {
+          if (y >= t - vh * 0.4) current = i;
+        });
+        window.scrollTo({ top: tops[current], behavior: "auto" });
+      }, 200);
+    };
+
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
     return () => {
+      clearTimeout(resizeTimer);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 };

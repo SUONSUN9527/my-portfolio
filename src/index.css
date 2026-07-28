@@ -90,6 +90,52 @@ body {
   font-weight: 500;
 }
 
+/* ============================================
+   矮窗口自适应：视口高度不足时逐级压缩各模块，
+   保证吸附滚动下每个模块尽量一屏装下
+   ============================================ */
+@media (max-height: 850px) {
+  [data-snap] {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+  [data-snap] h2 {
+    font-size: 36px;
+  }
+  .project-grid {
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .project-cover {
+    height: 96px;
+  }
+  .project-title {
+    font-size: 16px;
+  }
+  .project-desc {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .project-lead {
+    display: none;
+  }
+}
+
+@media (max-height: 720px) {
+  [data-snap] h2 {
+    font-size: 30px;
+  }
+  .project-cover {
+    height: 82px;
+  }
+  .project-desc {
+    display: none;
+  }
+  .project-tags {
+    padding-top: 6px;
+  }
+}
+
 /* canvas 加载动画 */
 .canvas-loader {
   width: 40px;

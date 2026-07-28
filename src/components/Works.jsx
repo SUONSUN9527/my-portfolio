@@ -51,7 +51,7 @@ const ProjectCard = ({ index, project, meta }) => {
         className='bg-tertiary border border-line p-4 rounded-2xl w-full h-full shadow-card'
       >
         <div className='flex flex-col h-full'>
-          <div className='relative w-full h-[clamp(88px,13vh,130px)] flex-shrink-0'>
+          <div className='project-cover relative w-full h-[130px] flex-shrink-0'>
             {cover && !imgFailed ? (
               <img
                 src={cover}
@@ -98,12 +98,14 @@ const ProjectCard = ({ index, project, meta }) => {
                 <span className='text-secondary text-[12px]'>★ {stars}</span>
               )}
             </div>
-            <h3 className='mt-0.5 text-ink font-bold text-[18px]'>{name}</h3>
-            <p className='mt-1.5 text-secondary text-[13px] leading-[20px] clamp-2'>
+            <h3 className='project-title mt-0.5 text-ink font-bold text-[18px]'>
+              {name}
+            </h3>
+            <p className='project-desc mt-1.5 text-secondary text-[13px] leading-[20px] clamp-2'>
               {description}
             </p>
 
-            <div className='mt-auto pt-3 flex flex-wrap gap-2'>
+            <div className='project-tags mt-auto pt-3 flex flex-wrap gap-2'>
               {(project.tags || []).map((tag) => (
                 <p
                   key={`${name}-${tag.name}`}
@@ -154,13 +156,13 @@ const Works = () => {
       <div className='w-full flex'>
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className='mt-2 text-secondary text-[15px] max-w-3xl leading-[28px]'
+          className='project-lead mt-2 text-secondary text-[15px] max-w-3xl leading-[28px]'
         >
           GitHub 置顶项目，Star 数为仓库实时数据，点击卡片右上角图标直达源码。
         </motion.p>
       </div>
 
-      <div className='mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch'>
+      <div className='project-grid mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-stretch'>
         {projects.map((project, index) => (
           <ProjectCard
             key={`project-${index}`}
