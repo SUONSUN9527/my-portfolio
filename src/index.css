@@ -80,14 +80,140 @@ body {
   color: #4f6f8f;
 }
 
-/* 时间线在浅色主题下的覆写 */
-.vertical-timeline::before {
-  background: #e7e1d6 !important;
+/* 实习经历时间线：日期固定在竖线左侧，内容卡片位于右侧 */
+.experience-timeline {
+  --date-column: 28%;
+  --marker-column: 72px;
+  position: relative;
 }
-.vertical-timeline-element-date {
+
+.experience-timeline::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: calc(var(--date-column) + var(--marker-column) / 2 - 2px);
+  width: 4px;
+  border-radius: 999px;
+  background: #e7e1d6;
+}
+
+.experience-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--date-column) var(--marker-column) minmax(0, 1fr);
+  align-items: start;
+}
+
+.experience-item + .experience-item {
+  margin-top: 48px;
+}
+
+.experience-date {
+  padding: 18px 18px 0 0;
   color: #7c7669;
-  opacity: 1 !important;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.experience-marker {
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #3d8b7d;
+  border-radius: 999px;
+  background: #e4efea;
+  box-shadow: 0 3px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.experience-marker span {
+  color: #2f6e63;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.experience-card {
+  position: relative;
+  padding: 24px;
+  border: 1px solid #e7e1d6;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px -24px rgba(64, 54, 38, 0.18);
+}
+
+.experience-card-arrow {
+  position: absolute;
+  top: 21px;
+  right: 100%;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-right: 9px solid #e7e1d6;
+  border-bottom: 8px solid transparent;
+}
+
+.experience-card-arrow::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 2px;
+  border-top: 7px solid transparent;
+  border-right: 8px solid #ffffff;
+  border-bottom: 7px solid transparent;
+}
+
+@media (max-width: 767px) {
+  .experience-timeline {
+    --date-column: 80px;
+    --marker-column: 36px;
+  }
+
+  .experience-timeline::before {
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    left: calc(var(--date-column) + var(--marker-column) / 2 - 1.5px);
+  }
+
+  .experience-item + .experience-item {
+    margin-top: 32px;
+  }
+
+  .experience-date {
+    padding: 8px 8px 0 0;
+    font-size: 11px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .experience-marker {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  .experience-marker span {
+    font-size: 12px;
+  }
+
+  .experience-card {
+    padding: 18px 16px;
+  }
+
+  .experience-card h3 {
+    font-size: 19px;
+  }
+
+  .experience-card-arrow {
+    top: 8px;
+  }
 }
 
 /* ============================================
