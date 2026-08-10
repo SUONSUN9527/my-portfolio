@@ -17,6 +17,9 @@ const ExperienceCard = ({ experience, index }) => {
 
       <motion.div
         variants={fadeIn("left", "spring", index * 0.15, 0.7)}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: false, amount: 0.08 }}
         className='experience-card'
       >
         <div className='experience-card-arrow' aria-hidden='true' />
