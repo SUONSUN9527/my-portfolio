@@ -147,6 +147,19 @@ const projects = [
       { name: "多端同步", color: "tag-blue" },
     ],
   },
+  {
+    repo: "SUONSUN9527/deepseek-harness-flow-arrange",
+    category: "GitHub 项目",
+    name: "DeepSeek Harness 双模型编排",
+    description:
+      "基于 DeepSeek Harness 的二次开发：Claude 编排 · Codex 执行的双模型协作流程，配套 Electron 桌面端与双模型设置 UI。",
+    image: "projects/dsh-desktop.png",
+    tags: [
+      { name: "TypeScript", color: "tag-green" },
+      { name: "双模型编排", color: "tag-rust" },
+      { name: "Electron", color: "tag-blue" },
+    ],
+  },
 ];
 
 export { services, technologies, experiences, projects };
