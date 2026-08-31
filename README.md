@@ -1,5 +1,7 @@
 # 个人主页 · Zhenying
 
+**在线预览：<https://suonsun9527.github.io/my-portfolio/>**
+
 3D 交互个人简历页：React + Three.js（react-three-fiber）+ Tailwind CSS + Framer Motion。
 
 - 整屏吸附滚动，每个模块独立入场动画
